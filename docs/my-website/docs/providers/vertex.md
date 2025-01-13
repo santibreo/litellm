@@ -404,14 +404,15 @@ curl http://localhost:4000/v1/chat/completions \
 If this was your initial VertexAI Grounding code,
 
 ```python
-import vertexai 
+import vertexai
+from vertexai.generative_models import GenerativeModel, GenerationConfig, Tool, grounding
 
 vertexai.init(project=project_id, location="us-central1")
 
 model = GenerativeModel("gemini-1.5-flash-001")
 
 # Use Google Search for grounding
-tool = Tool.from_google_search_retrieval(grounding.GoogleSearchRetrieval(disable_attributon=False))
+tool = Tool.from_google_search_retrieval(grounding.GoogleSearchRetrieval())
 
 prompt = "When is the next total solar eclipse in US?"
 response = model.generate_content(
